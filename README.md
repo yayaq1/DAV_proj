@@ -11,9 +11,6 @@ An interactive data visualization dashboard exploring tuberculosis trends across
 - Region-based filtering
 - Responsive design
 
-## Live Demo
-
-Visit the live dashboard: [TB Data Visualization Dashboard](https://yayaq.github.io/DAV/)
 
 ## Technologies Used
 
@@ -28,12 +25,18 @@ Visit the live dashboard: [TB Data Visualization Dashboard](https://yayaq.github
 - African tuberculosis data (2000-2020)
 - Asian tuberculosis data (2000-2020)
 
+## How to Run the Project
+
+Alternatively, instead of running the project, you can check it out live: 
+
+https://ourdavproject.netlify.app
+
 ## Local Development
 
 To run this project locally:
 
 1. Clone the repository
-2. Open with a local server (e.g., Live Server in VS Code)
+2. run `python server.py`
 3. Navigate to `index.html`
 
 ## Documentation
