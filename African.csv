@@ -1,0 +1,85 @@
+Country,Region,Year,Cured,Deaths,Cases
+DR Congo,Africa,2007,89.0,20.0,109
+DR Congo,Africa,2008,113.0,27.0,140
+DR Congo,Africa,2009,58.0,28.0,86
+DR Congo,Africa,2010,38.0,20.0,58
+DR Congo,Africa,2011,82.0,30.0,112
+DR Congo,Africa,2012,86.0,19.0,105
+DR Congo,Africa,2013,169.0,38.0,207
+DR Congo,Africa,2014,334.0,51.0,385
+DR Congo,Africa,2015,420.0,48.0,468
+DR Congo,Africa,2016,555.0,63.0,618
+DR Congo,Africa,2017,698.0,72.0,770
+DR Congo,Africa,2018,599.0,66.0,665
+DR Congo,Africa,2019,659.0,96.0,755
+DR Congo,Africa,2020,876.0,52.0,928
+Ethiopia,Africa,2007,,,0
+Ethiopia,Africa,2008,,,0
+Ethiopia,Africa,2009,66.0,6.0,72
+Ethiopia,Africa,2010,96.0,15.0,111
+Ethiopia,Africa,2011,84.0,21.0,105
+Ethiopia,Africa,2012,224.0,32.0,256
+Ethiopia,Africa,2013,270.0,49.0,319
+Ethiopia,Africa,2014,388.0,85.0,473
+Ethiopia,Africa,2015,496.0,79.0,575
+Ethiopia,Africa,2016,509.0,85.0,594
+Ethiopia,Africa,2017,536.0,77.0,613
+Ethiopia,Africa,2018,508.0,75.0,583
+Ethiopia,Africa,2019,441.0,58.0,499
+Ethiopia,Africa,2020,354.0,34.0,388
+Kenya,Africa,2007,11.0,2.0,13
+Kenya,Africa,2008,27.0,9.0,36
+Kenya,Africa,2009,61.0,20.0,81
+Kenya,Africa,2010,79.0,13.0,92
+Kenya,Africa,2011,86.0,11.0,97
+Kenya,Africa,2012,164.0,15.0,179
+Kenya,Africa,2013,219.0,28.0,247
+Kenya,Africa,2014,181.0,43.0,224
+Kenya,Africa,2015,242.0,51.0,293
+Kenya,Africa,2016,208.0,54.0,262
+Kenya,Africa,2017,274.0,71.0,345
+Kenya,Africa,2018,347.0,71.0,418
+Kenya,Africa,2019,372.0,80.0,452
+Kenya,Africa,2020,462.0,98.0,560
+Malawi,Africa,2007,,,0
+Malawi,Africa,2008,10.0,6.0,16
+Malawi,Africa,2009,6.0,3.0,9
+Malawi,Africa,2010,18.0,5.0,23
+Malawi,Africa,2011,11.0,4.0,15
+Malawi,Africa,2012,12.0,6.0,18
+Malawi,Africa,2013,10.0,7.0,17
+Malawi,Africa,2014,31.0,18.0,49
+Malawi,Africa,2015,39.0,21.0,60
+Malawi,Africa,2016,34.0,17.0,51
+Malawi,Africa,2017,32.0,20.0,52
+Malawi,Africa,2018,83.0,19.0,102
+Malawi,Africa,2019,64.0,15.0,79
+Malawi,Africa,2020,81.0,17.0,98
+Mozambique,Africa,2007,37.0,22.0,59
+Mozambique,Africa,2008,49.0,35.0,84
+Mozambique,Africa,2009,,28.0,28
+Mozambique,Africa,2010,8.0,2.0,10
+Mozambique,Africa,2011,49.0,33.0,82
+Mozambique,Africa,2012,60.0,60.0,120
+Mozambique,Africa,2013,163.0,76.0,239
+Mozambique,Africa,2014,218.0,95.0,313
+Mozambique,Africa,2015,315.0,171.0,486
+Mozambique,Africa,2016,431.0,143.0,574
+Mozambique,Africa,2017,524.0,193.0,717
+Mozambique,Africa,2018,746.0,204.0,950
+Mozambique,Africa,2019,1048.0,193.0,1241
+Mozambique,Africa,2020,1039.0,178.0,1217
+Tanzania,Africa,2007,,,0
+Tanzania,Africa,2008,,,0
+Tanzania,Africa,2009,10.0,3.0,13
+Tanzania,Africa,2010,15.0,3.0,18
+Tanzania,Africa,2011,24.0,4.0,28
+Tanzania,Africa,2012,33.0,6.0,39
+Tanzania,Africa,2013,63.0,18.0,81
+Tanzania,Africa,2014,108.0,25.0,133
+Tanzania,Africa,2015,89.0,22.0,111
+Tanzania,Africa,2016,127.0,25.0,152
+Tanzania,Africa,2017,143.0,21.0,164
+Tanzania,Africa,2018,305.0,62.0,367
+Tanzania,Africa,2019,379.0,100.0,479
+Tanzania,Africa,2020,315.0,55.0,370

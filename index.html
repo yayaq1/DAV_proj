@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TB Data Visualization Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- TopoJSON -->
+    <script src="https://unpkg.com/topojson@3"></script>
+    <!-- Additional libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <div class="header-content">
+                <h1>Tuberculosis Data Visualization Dashboard</h1>
+                <div class="team-info">
+                    <p>Project done by:</p>
+                    <ul>
+                        <li>Yahya Qureshi</li>
+                        <li>Waleed Saeed</li>
+                        <li>Abu Bakar</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="controls">
+                <div class="filter-group">
+                    <label for="region">Region:</label>
+                    <select id="region">
+                        <option value="all">All Regions</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Africa">Africa</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="year-slider">Year: <span id="year-value">2000</span></label>
+                    <div class="slider-container">
+                        <input type="range" id="year-slider" min="2000" max="2020" value="2000" step="1">
+                        <button id="play-button" class="play-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="shared-legend">
+                <span class="legend-title">Legend for all visualizations:</span>
+                <div class="legend-item" data-region="Asia">
+                    <div class="legend-color" style="background-color: #2196F3;"></div>
+                    <span class="legend-text">Asia</span>
+                </div>
+                <div class="legend-item" data-region="Africa">
+                    <div class="legend-color" style="background-color: #FF9800;"></div>
+                    <span class="legend-text">Africa</span>
+                </div>
+            </div>
+        </header>
+        <div class="subheader">
+            <p>An interactive visualization dashboard exploring tuberculosis trends across Asia and Africa. Analyze patterns through multiple linked views including treemaps, force-directed graphs, and timeline visualizations.</p>
+        </div>
+        
+        <main class="visualization-grid">
+            <section class="viz-container map-chart">
+                <h2>Geographic Distribution</h2>
+                <div id="map-chart"></div>
+            </section>
+            
+            <section class="viz-container force-directed">
+                <h2>Country Relationships</h2>
+                <div id="force-directed"></div>
+            </section>
+            
+            <section class="viz-container timeline">
+                <h2>Timeline Analysis</h2>
+                <div id="timeline"></div>
+            </section>
+            
+            <section class="viz-container treemap">
+                <h2>Hierarchical View, Treemap</h2>
+                <div class="treemap-controls">
+                    <div class="metric-selector">
+                        <label for="treemap-metric">Metric:</label>
+                        <select id="treemap-metric">
+                            <option value="cases">Total Cases</option>
+                            <option value="deaths">Deaths</option>
+                            <option value="cured">Cured Cases</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="treemap-breadcrumb"></div>
+                <div id="treemap"></div>
+            </section>
+            
+            <section class="viz-container sunburst">
+                <h2>Regional Distribution (Sunburst)</h2>
+                <div id="sunburst"></div>
+            </section>
+        </main>
+
+        <section class="analysis-section">
+            <h2 class="analysis-title">Key Findings & Analysis</h2>
+            <div class="analysis-grid">
+                <div class="analysis-card" data-aos="fade-up">
+                    <h3>Regional Impact</h3>
+                    <p>Our study reveals that Asia, particularly India, bears the highest burden of TB cases globally. India's numbers significantly outpace other countries, accounting for approximately 27% of global cases.</p>
+                </div>
+                
+                <div class="analysis-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Treatment Success</h3>
+                    <p>Despite high case numbers, many Asian countries have shown remarkable progress in treatment success rates. Countries like China have achieved over 90% treatment success through systematic screening and treatment programs.</p>
+                </div>
+
+                <div class="analysis-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>African Context</h3>
+                    <p>African nations face unique challenges in TB control, with limited healthcare infrastructure being a key factor. However, countries like South Africa have made significant strides through innovative community-based approaches.</p>
+                </div>
+
+                <div class="analysis-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Success Stories</h3>
+                    <p>Several countries have demonstrated effective TB control strategies:
+                        <ul>
+                            <li>Vietnam: Achieved 90% reduction through early detection</li>
+                            <li>Thailand: Implemented successful DOTS strategy</li>
+                            <li>Bangladesh: Improved rural healthcare access</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="conclusion-section" data-aos="fade-up">
+            <h2>Conclusion & Learning Outcomes</h2>
+            <div class="conclusion-content">
+                <div class="learning-card" data-aos="fade-right" data-aos-delay="100">
+                    <h3>Data Visualization Mastery</h3>
+                    <p>Through this project, we gained deep insights into creating interactive and meaningful visualizations using D3.js. We learned to transform complex datasets into intuitive visual representations that tell compelling stories.</p>
+                </div>
+                <div class="learning-card" data-aos="fade-right" data-aos-delay="200">
+                    <h3>Technical Skills</h3>
+                    <p>Mastered modern web technologies including D3.js, advanced JavaScript, and responsive design principles. Implemented complex visualizations like Sunburst charts, Force-directed graphs, and interactive maps.</p>
+                </div>
+                <div class="learning-card" data-aos="fade-right" data-aos-delay="300">
+                    <h3>Public Health Insights</h3>
+                    <p>Analyzed tuberculosis trends across Asia and Africa, understanding the impact of healthcare initiatives and the importance of data-driven decision making in public health.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="thank-you-section" data-aos="zoom-in">
+            <div class="thank-you-content">
+                <h2>Thank You!</h2>
+                <p class="special-thanks">Special thanks to our amazing instructors:</p>
+                
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Course Instructor</h3>
+                    <p class="instructor-name">Miss Zonera Anjum</p>
+                    <p class="gratitude-message">For your exceptional guidance and inspiration throughout this course.</p>
+                </div>
+
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="150">
+                    <h3>Lab Instructor</h3>
+                    <p class="instructor-name">Miss Daniya Jadoon</p>
+                    <p class="gratitude-message">For your invaluable support and direction in the laboratory sessions.</p>
+                </div>
+
+                <div class="ta-section" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Teaching Assistants</h3>
+                    <div class="ta-grid">
+                        <div class="ta-card">Kissa</div>
+                        <div class="ta-card">Umme Hani</div>
+                        <div class="ta-card">Eman</div>
+                        <div class="ta-card">Ayera</div>
+                    </div>
+                    <p class="gratitude-message">For your continuous support and dedication!</p>
+                </div>
+
+                <div class="ta-section" data-aos="fade-up" data-aos-delay="250">
+                    <h3>Lab Demonstrators</h3>
+                    <div class="ta-grid">
+                        <div class="ta-card">Farhan Javaid</div>
+                        <div class="ta-card">Noor Ul Huda</div>
+                    </div>
+                    <p class="gratitude-message">For your excellent guidance in the practical sessions!</p>
+                </div>
+            </div>
+            <button id="celebrateBtn" class="celebrate-btn">Celebrate! 🎉</button>
+        </section>
+    </div>
+
+    <!-- Data processing and utility functions -->
+    <script src="js/utils.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/sunburst.js"></script>
+    <script src="js/treemap.js"></script>
+    <script src="js/timeline.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/force-directed.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                offset: 100,
+                once: true
+            });
+            
+            // Initialize dashboard features
+            initDashboardFeatures();
+        });
+    </script>
+    <!-- Main application logic -->
+    <script src="js/main.js"></script>
+    <!-- Confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</body>
+</html>
