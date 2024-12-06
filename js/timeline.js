@@ -134,14 +134,26 @@ function updateTimeline() {
 
     // Draw lines and points
     lines.forEach(line => {
-        // Draw the line
-        timelineG.append('path')
+        // Draw the line with animation
+        const path = timelineG.append('path')
             .datum(timelineData)
-            .attr('class', 'line')
+            .attr('class', `line-${line.metric}`)
             .attr('fill', 'none')
             .attr('stroke', line.color)
             .attr('stroke-width', 2)
             .attr('d', createLine(line.metric));
+
+        // Get the total length of the path
+        const totalLength = path.node().getTotalLength();
+
+        // Set up the initial state of the line
+        path
+            .attr('stroke-dasharray', totalLength + ' ' + totalLength)
+            .attr('stroke-dashoffset', totalLength)
+            .transition()
+            .duration(2000)
+            .ease(d3.easeLinear)
+            .attr('stroke-dashoffset', 0);
 
         // Add dots for each data point
         timelineG.selectAll(`.dot-${line.metric}`)
@@ -186,6 +198,22 @@ function updateTimeline() {
             });
     });
 
+    // Add CSS styles for legend interactivity
+    const style = document.createElement('style');
+    style.textContent = `
+        .legend-item.inactive line,
+        .legend-item.inactive circle {
+            opacity: 0.2;
+        }
+        .legend-item.inactive text {
+            opacity: 0.5;
+        }
+        .legend-item:hover {
+            opacity: 0.8;
+        }
+    `;
+    document.head.appendChild(style);
+
     // Add legend
     const legend = timelineSvg.append('g')
         .attr('class', 'legend')
@@ -193,7 +221,26 @@ function updateTimeline() {
 
     lines.forEach((line, i) => {
         const legendItem = legend.append('g')
-            .attr('transform', `translate(0,${i * 25})`);
+            .attr('transform', `translate(0,${i * 25})`)
+            .attr('class', `legend-item legend-${line.metric}`)
+            .style('cursor', 'pointer')
+            .on('click', function() {
+                // Toggle active state
+                const active = !d3.select(this).classed('inactive');
+                d3.select(this).classed('inactive', active);
+                
+                // Update line visibility
+                timelineG.selectAll(`.line-${line.metric}`)
+                    .transition()
+                    .duration(300)
+                    .style('opacity', active ? 0.2 : 1);
+                
+                // Update points visibility
+                timelineG.selectAll(`.dot-${line.metric}`)
+                    .transition()
+                    .duration(300)
+                    .style('opacity', active ? 0.2 : 1);
+            });
 
         // Add line to legend
         legendItem.append('line')
