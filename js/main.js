@@ -36,7 +36,10 @@ async function loadData() {
         initializeVisualizations();
         setupEventListeners();
         
-        // Set initial year
+        // Load saved state after initializing visualizations
+        loadDashboardState();
+        
+        // Update year value display
         const yearValue = document.getElementById('year-value');
         yearValue.textContent = state.selectedYear;
     } catch (error) {
@@ -61,6 +64,9 @@ function initializeVisualizations() {
     
     // Initialize sunburst
     initSunburst(state.data);
+    
+    // Enable zoom behaviors after initialization
+    if (typeof enableZoom === 'function') enableZoom();
 }
 
 // Setup event listeners for filters and interactions
@@ -70,6 +76,7 @@ function setupEventListeners() {
     regionSelect.addEventListener('change', (event) => {
         state.selectedRegion = event.target.value;
         updateAllVisualizations();
+        saveDashboardState(); // Save state when region changes
     });
 
     // Year slider
@@ -81,6 +88,7 @@ function setupEventListeners() {
         state.selectedYear = parseInt(event.target.value);
         yearValue.textContent = state.selectedYear;
         updateAllVisualizations();
+        saveDashboardState(); // Save state when year changes
     });
 
     // Play button functionality

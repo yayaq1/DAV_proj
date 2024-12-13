@@ -15,7 +15,19 @@ function initForceDirected(data) {
         .attr('width', width)
         .attr('height', height);
 
-    forceG = forceSvg.append('g');
+    forceG = forceSvg.append('g')
+        .attr('transform', 'translate(0,0)');
+
+    // Add zoom behavior immediately
+    const zoom = d3.zoom()
+        .scaleExtent([0.1, 4])
+        .on('zoom', (event) => {
+            const transform = event.transform;
+            forceG.attr('transform', `translate(${transform.x},${transform.y}) scale(${transform.k})`);
+            saveDashboardState(); // Save state when zoom changes
+        });
+
+    forceSvg.call(zoom);
 
     // Process data for force layout
     const processedData = processForceData(data);
@@ -197,14 +209,6 @@ function initForceDirected(data) {
             .attr('y', d => d.y - 15);
     });
 
-    // Add zoom behavior
-    const zoom = d3.zoom()
-        .scaleExtent([0.1, 4])
-        .on('zoom', (event) => {
-            forceG.attr('transform', event.transform);
-        });
-
-    forceSvg.call(zoom);
 }
 
 // Process data for force layout

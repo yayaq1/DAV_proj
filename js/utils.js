@@ -44,6 +44,9 @@ function saveDashboardState() {
         selectedYear: state.selectedYear,
         selectedRegion: state.selectedRegion,
         filters: state.filters || {},
+        treemapMetric: currentMetric, // Save treemap metric
+        mapTransform: mapG ? mapG.attr('transform') : null,
+        forceTransform: forceG ? forceG.attr('transform') : null,
         timestamp: new Date().toISOString()
     };
     
@@ -55,8 +58,47 @@ function loadDashboardState() {
     const savedState = localStorage.getItem('tbDashboardState');
     if (savedState) {
         const parsedState = JSON.parse(savedState);
-        state.selectedYear = parsedState.selectedYear;
-        state.selectedRegion = parsedState.selectedRegion;
+        
+        // Restore year and update slider
+        if (parsedState.selectedYear) {
+            state.selectedYear = parsedState.selectedYear;
+            const yearSlider = document.getElementById('year-slider');
+            const yearValue = document.getElementById('year-value');
+            if (yearSlider && yearValue) {
+                yearSlider.value = state.selectedYear;
+                yearValue.textContent = state.selectedYear;
+            }
+        }
+        
+        // Restore region
+        if (parsedState.selectedRegion) {
+            state.selectedRegion = parsedState.selectedRegion;
+            const regionSelect = document.getElementById('region');
+            if (regionSelect) {
+                regionSelect.value = state.selectedRegion;
+            }
+        }
+        
+        // Restore treemap metric
+        if (parsedState.treemapMetric) {
+            currentMetric = parsedState.treemapMetric;
+            const treemapMetric = document.getElementById('treemap-metric');
+            if (treemapMetric) {
+                treemapMetric.value = currentMetric;
+            }
+        }
+        
+        // Restore transforms after a short delay to ensure elements are ready
+        setTimeout(() => {
+            if (parsedState.mapTransform && mapG) {
+                mapG.attr('transform', parsedState.mapTransform);
+            }
+            
+            if (parsedState.forceTransform && forceG) {
+                forceG.attr('transform', parsedState.forceTransform);
+            }
+        }, 100);
+        
         state.filters = parsedState.filters || {};
         
         // Update UI to reflect loaded state

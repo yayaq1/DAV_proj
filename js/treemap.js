@@ -162,11 +162,22 @@ function initTreemap(data) {
     d3.selectAll('.treemap-tooltip').remove();
 
     // Set up metric selector
-    d3.select('#treemap-metric')
+    const metricSelector = d3.select('#treemap-metric')
         .on('change', function() {
             currentMetric = this.value;
             updateTreemap();
+            saveDashboardState(); // Save state when metric changes
         });
+
+    // Set initial metric if stored in state
+    const savedState = localStorage.getItem('tbDashboardState');
+    if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        if (parsedState.treemapMetric) {
+            currentMetric = parsedState.treemapMetric;
+            metricSelector.property('value', currentMetric);
+        }
+    }
 
     // Set up dimensions
     const width = document.getElementById('treemap').clientWidth;

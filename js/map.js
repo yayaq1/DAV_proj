@@ -15,7 +15,7 @@ function initMap(data) {
         .attr('height', height);
 
     // Create map group with margins
-    const mapGroup = mapSvg.append('g')
+    mapG = mapSvg.append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
     // Create projection centered on Africa and Asia
@@ -35,11 +35,20 @@ function initMap(data) {
         .attr('class', 'map-legend')
         .attr('transform', `translate(${width - margin.right + 20},${margin.top})`);
 
+    // Add zoom behavior immediately
+    const zoom = d3.zoom()
+        .scaleExtent([1, 8])
+        .on('zoom', (event) => {
+            const transform = event.transform;
+            mapG.attr('transform', `translate(${transform.x},${transform.y}) scale(${transform.k})`);
+            saveDashboardState();
+        });
+
+    mapSvg.call(zoom);
+
     // Load world map data
     d3.json('https://unpkg.com/world-atlas@2/countries-110m.json')
         .then(worldData => {
-            mapG = mapGroup.append('g');
-            
             // Create a map of country names to features for later use
             const countries = topojson.feature(worldData, worldData.objects.countries);
             window.countryFeatures = {};
@@ -99,9 +108,6 @@ function initMap(data) {
 
             // Update map with data
             updateMap(data);
-
-            // Enable zoom
-            enableZoom();
         });
 }
 
@@ -228,15 +234,4 @@ function updateMapLegend(colorScale, maxCases) {
     mapLegend.append('g')
         .attr('transform', `translate(${legendWidth}, 20)`)
         .call(legendAxis);
-}
-
-// Add zoom behavior
-function enableZoom() {
-    const zoom = d3.zoom()
-        .scaleExtent([1, 8])
-        .on('zoom', (event) => {
-            mapG.attr('transform', event.transform);
-        });
-
-    mapSvg.call(zoom);
 }
